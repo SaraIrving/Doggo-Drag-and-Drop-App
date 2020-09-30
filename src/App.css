@@ -15,7 +15,7 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  max-height: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,4 +35,39 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.listContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.listWrapper {
+  max-width: 70%;
+}
+
+.dogListWrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: lightblue;
+  border: 5px solid salmon;
+}
+
+
+.dogWrapper {
+  border: 3px solid fuchsia;
+  border-radius: 45px;
+  padding: 1em;
+  margin: 1em;
+  max-width: 70%;
+  background-color: peachpuff;
+}
+
+.dogPic {
+  width: 70%;
+  height: 70%;
 }
