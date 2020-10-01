@@ -26,11 +26,9 @@ useEffect(() => {
 }, [])
 
 
+const onDragEnd = function(result) {
 
-
-
-
-
+}
 
   return (
     <div className="App">
@@ -41,10 +39,14 @@ useEffect(() => {
       </header>
       <div className="listContainer">
         <h2>Drag and drop these puppers to put them in order of most boopable!</h2>
-        <DragDropContext>
-          <div className="listWrapper">
-            <List state={state}/>
-          </div>
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable droppableId="list">
+            <div className="listWrapper">
+          
+                <List state={state}/>
+              
+            </div>
+          </Droppable>
         </DragDropContext>
       </div>
     </div>
