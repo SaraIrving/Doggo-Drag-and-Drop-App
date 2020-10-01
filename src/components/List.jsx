@@ -6,10 +6,14 @@ export default function List (props) {
 
   return (
     <div className="dogListWrapper">
-      <Droppable droppableId={id}>
-        {props.state.map(doggObj => (
-        <ListItem item={doggObj.pic} key={doggObj.id} />
-        ))} 
+      <Droppable droppableId={props.item_id}>
+        {provided => (
+          <div {...provided.droppableProps} ref={provided.innerRef}>
+            {props.state.map(doggObj => (
+            <ListItem item={doggObj.pic} key={doggObj.id} />
+            ))} 
+          </div>
+        )}
       </Droppable>
     </div>
 
