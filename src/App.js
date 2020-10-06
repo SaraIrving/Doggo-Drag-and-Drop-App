@@ -60,23 +60,27 @@ console.log('state = ', state);
       <div className="listContainer">
         <h2>Drag and drop these puppers to put them in order of most boopable!</h2>
         <DragDropContext>
-          <ul>
-            {state.map(({id, pic}) => {
-              let name = dogNames.maleRandom();
+          <Droppable droppableId="doggos">
+            {(provided) => (
+              <ul className="dogs" {...provided.doppableProps} ref={provided.innerRef}>
+              {state.map(({id, pic}) => {
+                let name = dogNames.maleRandom();
 
-              return (
-                <ol key={id}>
-                  <div>
-                    <img src={pic} alt="invisible doggo"/>
-                  </div>
-                  <p>
-                    {name}
-                  </p>
+                return (
+                  <ol key={id}>
+                    <div>
+                      <img src={pic} alt="invisible doggo"/>
+                    </div>
+                    <p>
+                      {name}
+                    </p>
 
-                </ol>
-              );
-            })}
-          </ul>
+                  </ol>
+                );
+                })}
+            </ul>
+            )}
+          </Droppable>
         </DragDropContext>
       </div>
     </div>
