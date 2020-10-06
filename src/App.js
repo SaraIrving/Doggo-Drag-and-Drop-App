@@ -10,21 +10,23 @@ const dogNames = require('dog-names');
 
 function App() {
 
+  const [dogs, updateDogs] = useState(dogPics);
+
  const [state, setState] = useState([]);
 
-//  const dogPics = ['https://images.dog.ceo/breeds/terrier-irish/n02093991_1282.jpg', 'https://images.dog.ceo/breeds/kuvasz/n02104029_2656.jpg', 'https://images.dog.ceo/breeds/havanese/00100trPORTRAIT_00100_BURST20191112123933390_COVER.jpg'];
+ const dogPics = [{pic: 'https://images.dog.ceo/breeds/terrier-irish/n02093991_1282.jpg', id: 1}, {pic: 'https://images.dog.ceo/breeds/kuvasz/n02104029_2656.jpg', id: 2}, {pic: 'https://images.dog.ceo/breeds/havanese/00100trPORTRAIT_00100_BURST20191112123933390_COVER.jpg', id: 3}];
 
-useEffect(() => {
-  for (let i = 0; i < 3; i++) {
-    axios.get('https://dog.ceo/api/breeds/image/random')
-  .then(response => {
-    console.log('dog pic we got = ', response.data.message);
-    // dogPics.push({pic: response.data.message, id: i + 1});
-    setState(prev => [...prev, {pic: response.data.message, id: i + 1}])
-  })
-  .catch(err => console.log(err));
-  }
-}, [])
+// useEffect(() => {
+//   for (let i = 0; i < 3; i++) {
+//     axios.get('https://dog.ceo/api/breeds/image/random')
+//   .then(response => {
+//     console.log('dog pic we got = ', response.data.message);
+//     // dogPics.push({pic: response.data.message, id: i + 1});
+//     setState(prev => [...prev, {pic: response.data.message, id: i + 1}])
+//   })
+//   .catch(err => console.log(err));
+//   }
+// }, [])
 
 
 const onDragEnd = function(result) {
@@ -63,7 +65,7 @@ console.log('state = ', state);
           <Droppable droppableId="doggos">
             {(provided) => (
               <ul className="dogs" {...provided.doppableProps} ref={provided.innerRef}>
-              {state.map(({id, pic}, index) => {
+              {dogPics.map(({id, pic}, index) => {
                 let name = dogNames.maleRandom();
 
                 return (
@@ -81,6 +83,7 @@ console.log('state = ', state);
                   </Draggable>
                 );
                 })}
+                {provided.placeholder}
             </ul>
             )}
           </Droppable>
