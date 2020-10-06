@@ -10,11 +10,9 @@ const dogNames = require('dog-names');
 
 function App() {
 
-  const [dogs, updateDogs] = useState(dogPics);
-
  const [state, setState] = useState([]);
 
- const dogPics = [{pic: 'https://images.dog.ceo/breeds/terrier-irish/n02093991_1282.jpg', id: 1}, {pic: 'https://images.dog.ceo/breeds/kuvasz/n02104029_2656.jpg', id: 2}, {pic: 'https://images.dog.ceo/breeds/havanese/00100trPORTRAIT_00100_BURST20191112123933390_COVER.jpg', id: 3}];
+ const dogPics = [{pic: 'https://images.dog.ceo/breeds/terrier-irish/n02093991_1282.jpg', id: 1, name: "bob"}, {pic: 'https://images.dog.ceo/breeds/kuvasz/n02104029_2656.jpg', id: 2, name: "frank"}, {pic: 'https://images.dog.ceo/breeds/havanese/00100trPORTRAIT_00100_BURST20191112123933390_COVER.jpg', id: 3, name: "joe"}];
 
 // useEffect(() => {
 //   for (let i = 0; i < 3; i++) {
@@ -52,6 +50,14 @@ console.log('state = ', state);
   //   </div>
   // );
 
+  const [dogs, updateDogs] = useState(dogPics);
+
+  function handleOnDragEnd(result) {
+    console.log('result = ', result);
+
+
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -61,22 +67,22 @@ console.log('state = ', state);
       </header>
       <div className="listContainer">
         <h2>Drag and drop these puppers to put them in order of most boopable!</h2>
-        <DragDropContext>
+        <DragDropContext onDragEnd={handleOnDragEnd}>
           <Droppable droppableId="doggos">
             {(provided) => (
               <ul className="dogs" {...provided.doppableProps} ref={provided.innerRef}>
-              {dogPics.map(({id, pic}, index) => {
-                let name = dogNames.maleRandom();
+              {dogPics.map(({id, pic, name}, index) => {
+                let randomName = dogNames.maleRandom();
 
                 return (
-                  <Draggable key={id} draggableId={`#{id}`} index={index}>
+                  <Draggable key={id} draggableId={name} index={index}>
                     {(provided) => (
                       <ol {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
                         <div>
                           <img src={pic} alt="invisible doggo"/>
                         </div>
                         <p>
-                          {name}
+                          {randomName}
                         </p>
                       </ol>
                     )} 
