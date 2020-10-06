@@ -63,19 +63,22 @@ console.log('state = ', state);
           <Droppable droppableId="doggos">
             {(provided) => (
               <ul className="dogs" {...provided.doppableProps} ref={provided.innerRef}>
-              {state.map(({id, pic}) => {
+              {state.map(({id, pic}, index) => {
                 let name = dogNames.maleRandom();
 
                 return (
-                  <ol key={id}>
-                    <div>
-                      <img src={pic} alt="invisible doggo"/>
-                    </div>
-                    <p>
-                      {name}
-                    </p>
-
-                  </ol>
+                  <Draggable key={id} draggableId={`#{id}`} index={index}>
+                    {(provided) => (
+                      <ol {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                        <div>
+                          <img src={pic} alt="invisible doggo"/>
+                        </div>
+                        <p>
+                          {name}
+                        </p>
+                      </ol>
+                    )} 
+                  </Draggable>
                 );
                 })}
             </ul>
