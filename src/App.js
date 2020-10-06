@@ -5,6 +5,7 @@ import logo from './logo.svg';
 import './App.css';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import List from './components/List';
+const dogNames = require('dog-names');
 
 
 function App() {
@@ -30,6 +31,25 @@ const onDragEnd = function(result) {
 
 }
 
+console.log('state = ', state);
+  // return (
+  //   <div className="App">
+  //     <header className="App-header">
+  //       <h1>
+  //         Most Handsome Doggo
+  //       </h1>
+  //     </header>
+  //     <div className="listContainer">
+  //       <h2>Drag and drop these puppers to put them in order of most boopable!</h2>
+  //       <DragDropContext onDragEnd={onDragEnd}>
+  //           <div className="listWrapper">
+  //               <List state={state}/>
+  //           </div>
+  //       </DragDropContext>
+  //     </div>
+  //   </div>
+  // );
+
   return (
     <div className="App">
       <header className="App-header">
@@ -39,14 +59,24 @@ const onDragEnd = function(result) {
       </header>
       <div className="listContainer">
         <h2>Drag and drop these puppers to put them in order of most boopable!</h2>
-        <DragDropContext onDragEnd={onDragEnd}>
-          <Droppable droppableId="list">
-            <div className="listWrapper">
-          
-                <List state={state}/>
-              
-            </div>
-          </Droppable>
+        <DragDropContext>
+          <ul>
+            {state.map(({id, pic}) => {
+              let name = dogNames.maleRandom();
+
+              return (
+                <ol key={id}>
+                  <div>
+                    <img src={pic} alt="invisible doggo"/>
+                  </div>
+                  <p>
+                    {name}
+                  </p>
+
+                </ol>
+              );
+            })}
+          </ul>
         </DragDropContext>
       </div>
     </div>
