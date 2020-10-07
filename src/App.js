@@ -10,7 +10,7 @@ const dogNames = require('dog-names');
 
 function App() {
 
- const [state, setState] = useState([]);
+//  const [state, setState] = useState([]);
 
  const dogPics = [{pic: 'https://images.dog.ceo/breeds/terrier-irish/n02093991_1282.jpg', id: 1, name: "bob"}, {pic: 'https://images.dog.ceo/breeds/kuvasz/n02104029_2656.jpg', id: 2, name: "frank"}, {pic: 'https://images.dog.ceo/breeds/havanese/00100trPORTRAIT_00100_BURST20191112123933390_COVER.jpg', id: 3, name: "joe"}];
 
@@ -27,11 +27,6 @@ function App() {
 // }, [])
 
 
-const onDragEnd = function(result) {
-
-}
-
-console.log('state = ', state);
   // return (
   //   <div className="App">
   //     <header className="App-header">
@@ -51,20 +46,24 @@ console.log('state = ', state);
   // );
 
   const [dogs, updateDogs] = useState(dogPics);
+  console.log("dogs at initialization = ", dogs);
 
   function handleOnDragEnd(result) {
     if(!result.destination) {
       return;
     }
     console.log('result = ', result);
-    const items = Array.from(dogPics);
+    // const items = Array.from(dogPics);
+    const items = Array.from(dogs);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
 
+    console.log("calling updateDogs!")
+    console.log('items = ', items);
     updateDogs(items);
-
-
   }
+
+  console.log('dogs state before the return = ', dogs);
 
   return (
     <div className="App">
@@ -79,7 +78,7 @@ console.log('state = ', state);
           <Droppable droppableId="doggos">
             {(provided) => (
               <ul className="dogListWrapper" {...provided.doppableProps} ref={provided.innerRef}>
-              {dogPics.map(({id, pic, name}, index) => {
+              {dogs.map(({id, pic, name}, index) => {
                 let randomName = dogNames.maleRandom();
 
                 return (
