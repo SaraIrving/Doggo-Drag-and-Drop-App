@@ -12,7 +12,7 @@ function App() {
 
 const [state, setState] = useState(0);
 console.log('state = ', state)
-const [dogs, updateDogs] = useState([]);
+const [dogs, updateDogs] = useState({refreshDogs: 0, dogPics: [{pic: 'https://images.dog.ceo/breeds/terrier-irish/n02093991_1282.jpg', id: 1, name: 'https://images.dog.ceo/breeds/terrier-irish/n02093991_1282.jpg', randomName: "bob"}]});
 console.log("dogs at initialization = ", dogs);
 
  const dogPics = [{pic: 'https://images.dog.ceo/breeds/terrier-irish/n02093991_1282.jpg', id: 1, name: "bob"}, {pic: 'https://images.dog.ceo/breeds/kuvasz/n02104029_2656.jpg', id: 2, name: "frank"}, {pic: 'https://images.dog.ceo/breeds/havanese/00100trPORTRAIT_00100_BURST20191112123933390_COVER.jpg', id: 3, name: "joe"}];
@@ -56,8 +56,9 @@ useEffect(() => {
   })
   .catch(err => console.log(err));
   }
-  updateDogs(prev => apiDogPics)
-}, [state])
+  // updateDogs(prev => apiDogPics)
+  updateDogs(prev => {return {...prev, dogPics: apiDogPics}})
+}, [dogs.refreshDogs])
 
 // console.log("apiDogPics = ", apiDogPics);
 
@@ -88,13 +89,14 @@ useEffect(() => {
     }
     console.log('result = ', result);
     // const items = Array.from(dogPics);
-    const items = Array.from(dogs);
+    const items = Array.from(dogs.dogPics);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
 
     console.log("calling updateDogs!")
     console.log('items = ', items);
-    updateDogs(items);
+    //updateDogs(items);
+    updateDogs(prev => {return {...prev, dogPics: items}})
   }
 
   console.log('dogs state before the return = ', dogs);
@@ -108,13 +110,15 @@ useEffect(() => {
       </header>
       <div className="listContainer">
         <h2>Drag and drop these puppers to put them in order of most boopable!</h2>
-        <button onClick={event => setState(prev => prev + 1)}>Show me dogs!</button>
+        <button onClick={event => updateDogs(prev => {return {...prev, refreshDogs: prev.refreshDogs += 1}})}>Show me dogs!</button>
+     
         <DragDropContext onDragEnd={handleOnDragEnd}>
           <Droppable droppableId="doggos">
             {(provided) => (
               <ul className="dogListWrapper" {...provided.doppableProps} ref={provided.innerRef}>
                 {console.log('dogs in the return before the map = ', dogs)}
-              {dogs.map(({id, pic, name, randomName}, index) => {
+                {console.log("what is dogs.dogPics? ", dogs.dogPics)}
+              {dogs.dogPics.map(({id, pic, name, randomName}, index) => {
                 // let randomName = dogNames.maleRandom();
 
                 return (
