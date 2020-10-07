@@ -41,6 +41,7 @@ console.log("dogs at initialization = ", dogs);
 
 // const apiDogPics = [];
 useEffect(() => {
+  console.log("inside the useEffect")
   const apiDogPics = [];
   for (let i = 0; i < 3; i++) {
     axios.get('https://dog.ceo/api/breeds/image/random')
@@ -55,8 +56,8 @@ useEffect(() => {
   })
   .catch(err => console.log(err));
   }
-  updateDogs(apiDogPics)
-}, [])
+  updateDogs(prev => apiDogPics)
+}, [state])
 
 // console.log("apiDogPics = ", apiDogPics);
 
