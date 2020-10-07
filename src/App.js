@@ -10,7 +10,8 @@ const dogNames = require('dog-names');
 
 function App() {
 
-//  const [state, setState] = useState([]);
+const [state, setState] = useState(0);
+console.log('state = ', state)
 const [dogs, updateDogs] = useState([]);
 console.log("dogs at initialization = ", dogs);
 
@@ -18,38 +19,44 @@ console.log("dogs at initialization = ", dogs);
 
  const apiDogPics =[];
 
- console.log('dogs = ', dogs)
- if (dogs.length === 0) {
-  for (let i = 0; i < 3; i++) {
-        axios.get('https://dog.ceo/api/breeds/image/random')
-      .then(response => {
-        console.log('dog pic we got = ', response.data.message);
-        // dogPics.push({pic: response.data.message, id: i + 1});
-        //setState(prev => [...prev, {pic: response.data.message, id: i + 1}])
-        // apiDogPics.push({pic:response.data.message, id: i + 1, name: response.data.message})
-        let randomName = dogNames.maleRandom();
-        updateDogs(prev => [...prev, {pic: response.data.message, id: i + 1, name: response.data.message, randomName: randomName}])
-      })
-      .catch(err => console.log(err));
-      }
-
-      console.log('apiDogPics at end of loop = ', apiDogPics)
-      // updateDogs(apiDogPics);
-   
- }
-// const apiDogPics = [];
-// useEffect(() => {
+//  console.log('dogs = ', dogs)
+//  if (dogs.length === 0) {
 //   for (let i = 0; i < 3; i++) {
-//     axios.get('https://dog.ceo/api/breeds/image/random')
-//   .then(response => {
-//     console.log('dog pic we got = ', response.data.message);
-//     // dogPics.push({pic: response.data.message, id: i + 1});
-//     //setState(prev => [...prev, {pic: response.data.message, id: i + 1}])
-//     apiDogPics.push({pic:response.data.message, id: i + 1, name: response.data.message})
-//   })
-//   .catch(err => console.log(err));
-//   }
-// }, [])
+//         axios.get('https://dog.ceo/api/breeds/image/random')
+//       .then(response => {
+//         console.log('dog pic we got = ', response.data.message);
+//         // dogPics.push({pic: response.data.message, id: i + 1});
+//         //setState(prev => [...prev, {pic: response.data.message, id: i + 1}])
+//         // apiDogPics.push({pic:response.data.message, id: i + 1, name: response.data.message})
+//         let randomName = dogNames.maleRandom();
+//         updateDogs(prev => [...prev, {pic: response.data.message, id: i + 1, name: response.data.message, randomName: randomName}])
+//       })
+//       .catch(err => console.log(err));
+//       }
+
+//       console.log('apiDogPics at end of loop = ', apiDogPics)
+//       // updateDogs(apiDogPics);
+//  }
+
+
+// const apiDogPics = [];
+useEffect(() => {
+  const apiDogPics = [];
+  for (let i = 0; i < 3; i++) {
+    axios.get('https://dog.ceo/api/breeds/image/random')
+  .then(response => {
+    console.log('dog pic we got = ', response.data.message);
+    // dogPics.push({pic: response.data.message, id: i + 1});
+    //setState(prev => [...prev, {pic: response.data.message, id: i + 1}])
+    let randomName = dogNames.maleRandom();
+    apiDogPics.push({pic:response.data.message, id: i + 1, name: response.data.message, randomName: randomName})
+    
+    //updateDogs(prev => [...prev, {pic: response.data.message, id: i + 1, name: response.data.message, randomName: randomName}])
+  })
+  .catch(err => console.log(err));
+  }
+  updateDogs(apiDogPics)
+}, [])
 
 // console.log("apiDogPics = ", apiDogPics);
 
@@ -100,6 +107,7 @@ console.log("dogs at initialization = ", dogs);
       </header>
       <div className="listContainer">
         <h2>Drag and drop these puppers to put them in order of most boopable!</h2>
+        <button onClick={event => setState(prev => prev + 1)}>Show me dogs!</button>
         <DragDropContext onDragEnd={handleOnDragEnd}>
           <Droppable droppableId="doggos">
             {(provided) => (
@@ -116,7 +124,7 @@ console.log("dogs at initialization = ", dogs);
                           <img src={pic} alt="invisible doggo" className="dogPic"/>
                         </div>
                         <p>
-                          {randomName}
+                          This Good Boi's name is: {randomName}
                         </p>
                       </ol>
                     )} 
