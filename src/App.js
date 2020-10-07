@@ -11,20 +11,46 @@ const dogNames = require('dog-names');
 function App() {
 
 //  const [state, setState] = useState([]);
+const [dogs, updateDogs] = useState([]);
+console.log("dogs at initialization = ", dogs);
 
  const dogPics = [{pic: 'https://images.dog.ceo/breeds/terrier-irish/n02093991_1282.jpg', id: 1, name: "bob"}, {pic: 'https://images.dog.ceo/breeds/kuvasz/n02104029_2656.jpg', id: 2, name: "frank"}, {pic: 'https://images.dog.ceo/breeds/havanese/00100trPORTRAIT_00100_BURST20191112123933390_COVER.jpg', id: 3, name: "joe"}];
 
+ const apiDogPics =[];
+
+ console.log('dogs = ', dogs)
+ if (dogs.length === 0) {
+  for (let i = 0; i < 3; i++) {
+        axios.get('https://dog.ceo/api/breeds/image/random')
+      .then(response => {
+        console.log('dog pic we got = ', response.data.message);
+        // dogPics.push({pic: response.data.message, id: i + 1});
+        //setState(prev => [...prev, {pic: response.data.message, id: i + 1}])
+        apiDogPics.push({pic:response.data.message, id: i + 1, name: response.data.message})
+        updateDogs(prev => [...prev, {pic: response.data.message, id: i + 1, name: response.data.message}])
+      })
+      .catch(err => console.log(err));
+      }
+
+      console.log('apiDogPics at end of loop = ', apiDogPics)
+      // updateDogs(apiDogPics);
+   
+ }
+// const apiDogPics = [];
 // useEffect(() => {
 //   for (let i = 0; i < 3; i++) {
 //     axios.get('https://dog.ceo/api/breeds/image/random')
 //   .then(response => {
 //     console.log('dog pic we got = ', response.data.message);
 //     // dogPics.push({pic: response.data.message, id: i + 1});
-//     setState(prev => [...prev, {pic: response.data.message, id: i + 1}])
+//     //setState(prev => [...prev, {pic: response.data.message, id: i + 1}])
+//     apiDogPics.push({pic:response.data.message, id: i + 1, name: response.data.message})
 //   })
 //   .catch(err => console.log(err));
 //   }
 // }, [])
+
+// console.log("apiDogPics = ", apiDogPics);
 
 
   // return (
@@ -45,8 +71,7 @@ function App() {
   //   </div>
   // );
 
-  const [dogs, updateDogs] = useState(dogPics);
-  console.log("dogs at initialization = ", dogs);
+ 
 
   function handleOnDragEnd(result) {
     if(!result.destination) {
@@ -78,6 +103,7 @@ function App() {
           <Droppable droppableId="doggos">
             {(provided) => (
               <ul className="dogListWrapper" {...provided.doppableProps} ref={provided.innerRef}>
+                {console.log('dogs in the return before the map = ', dogs)}
               {dogs.map(({id, pic, name}, index) => {
                 let randomName = dogNames.maleRandom();
 
