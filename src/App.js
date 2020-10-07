@@ -53,7 +53,15 @@ console.log('state = ', state);
   const [dogs, updateDogs] = useState(dogPics);
 
   function handleOnDragEnd(result) {
+    if(!result.destination) {
+      return;
+    }
     console.log('result = ', result);
+    const items = Array.from(dogPics);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    updateDogs(items);
 
 
   }
@@ -70,16 +78,16 @@ console.log('state = ', state);
         <DragDropContext onDragEnd={handleOnDragEnd}>
           <Droppable droppableId="doggos">
             {(provided) => (
-              <ul className="dogs" {...provided.doppableProps} ref={provided.innerRef}>
+              <ul className="dogListWrapper" {...provided.doppableProps} ref={provided.innerRef}>
               {dogPics.map(({id, pic, name}, index) => {
                 let randomName = dogNames.maleRandom();
 
                 return (
                   <Draggable key={id} draggableId={name} index={index}>
                     {(provided) => (
-                      <ol {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                      <ol className="dogWrapper"{...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
                         <div>
-                          <img src={pic} alt="invisible doggo"/>
+                          <img src={pic} alt="invisible doggo" className="dogPic"/>
                         </div>
                         <p>
                           {randomName}
