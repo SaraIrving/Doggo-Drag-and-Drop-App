@@ -26,8 +26,9 @@ console.log("dogs at initialization = ", dogs);
         console.log('dog pic we got = ', response.data.message);
         // dogPics.push({pic: response.data.message, id: i + 1});
         //setState(prev => [...prev, {pic: response.data.message, id: i + 1}])
-        apiDogPics.push({pic:response.data.message, id: i + 1, name: response.data.message})
-        updateDogs(prev => [...prev, {pic: response.data.message, id: i + 1, name: response.data.message}])
+        // apiDogPics.push({pic:response.data.message, id: i + 1, name: response.data.message})
+        let randomName = dogNames.maleRandom();
+        updateDogs(prev => [...prev, {pic: response.data.message, id: i + 1, name: response.data.message, randomName: randomName}])
       })
       .catch(err => console.log(err));
       }
@@ -104,8 +105,8 @@ console.log("dogs at initialization = ", dogs);
             {(provided) => (
               <ul className="dogListWrapper" {...provided.doppableProps} ref={provided.innerRef}>
                 {console.log('dogs in the return before the map = ', dogs)}
-              {dogs.map(({id, pic, name}, index) => {
-                let randomName = dogNames.maleRandom();
+              {dogs.map(({id, pic, name, randomName}, index) => {
+                // let randomName = dogNames.maleRandom();
 
                 return (
                   <Draggable key={id} draggableId={name} index={index}>
