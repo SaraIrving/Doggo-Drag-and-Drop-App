@@ -12,7 +12,7 @@ function App() {
 
 const [state, setState] = useState(0);
 console.log('state = ', state)
-const [dogs, updateDogs] = useState({refreshDogs: 0, dogPics: [{pic: 'https://images.dog.ceo/breeds/terrier-irish/n02093991_1282.jpg', id: 1, name: 'https://images.dog.ceo/breeds/terrier-irish/n02093991_1282.jpg', randomName: "bob"}]});
+const [dogs, updateDogs] = useState({refreshDogs: 0, dogPics: [{pic: 'https://images.dog.ceo/breeds/terrier-irish/n02093991_1282.jpg', id: 0, name: 'https://images.dog.ceo/breeds/terrier-irish/n02093991_1282.jpg', randomName: "bob"}]});
 
 console.log("dogs at initialization = ", dogs);
 
@@ -20,25 +20,25 @@ console.log("dogs at initialization = ", dogs);
 
  const apiDogPics =[];
 
-//  console.log('dogs = ', dogs)
- if (dogs.dogPics.length === 1) {
-  for (let i = 0; i < 3; i++) {
-        axios.get('https://dog.ceo/api/breeds/image/random')
-      .then(response => {
-        console.log('dog pic we got = ', response.data.message);
-        // dogPics.push({pic: response.data.message, id: i + 1});
-        //setState(prev => [...prev, {pic: response.data.message, id: i + 1}])
-        // apiDogPics.push({pic:response.data.message, id: i + 1, name: response.data.message})
-        let randomName = dogNames.maleRandom();
-        //updateDogs(prev => [...prev, {pic: response.data.message, id: i + 1, name: response.data.message, randomName: randomName}])
-        apiDogPics.push({pic:response.data.message, id: i + 1, name: response.data.message, randomName: randomName})
-      })
-      .catch(err => console.log(err));
-      }
-      updateDogs(prev => {return {...prev, dogPics: apiDogPics}})
-      console.log('apiDogPics at end of loop = ', apiDogPics)
-      // updateDogs(apiDogPics);
- }
+// //THIS IS THE CONDITIONAL API CALL RELATING TO THE LENGTH OF THE PICS ARRAY IN STATE, IT DOES NOT REFRESH THE PICS EVER BUT DOES DISPLAY THEM
+//  if (dogs.dogPics.length === 1) {
+//   for (let i = 0; i < 3; i++) {
+//         axios.get('https://dog.ceo/api/breeds/image/random')
+//       .then(response => {
+//         console.log('dog pic we got = ', response.data.message);
+//         // dogPics.push({pic: response.data.message, id: i + 1});
+//         //setState(prev => [...prev, {pic: response.data.message, id: i + 1}])
+//         // apiDogPics.push({pic:response.data.message, id: i + 1, name: response.data.message})
+//         let randomName = dogNames.maleRandom();
+//         //updateDogs(prev => [...prev, {pic: response.data.message, id: i + 1, name: response.data.message, randomName: randomName}])
+//         apiDogPics.push({pic:response.data.message, id: i + 1, name: response.data.message, randomName: randomName})
+//       })
+//       .catch(err => console.log(err));
+//       }
+//       updateDogs(prev => {return {...prev, dogPics: apiDogPics}})
+//       console.log('apiDogPics at end of loop = ', apiDogPics)
+//       // updateDogs(apiDogPics);
+//  }
 
 
 // // THIS IS THE USE EFFECT API CALL- DOES NOT WORK WELL
@@ -84,6 +84,22 @@ console.log("dogs at initialization = ", dogs);
   // );
 
  
+  function onButtonClick () {
+    // let apiDogPics = [];
+    updateDogs(prev => {return {...prev, dogPics: []}})
+    for (let i = 0; i < 3; i++) {
+          axios.get('https://dog.ceo/api/breeds/image/random')
+        .then(response => {
+          let randomName = dogNames.maleRandom();
+          //apiDogPics.push({pic:response.data.message, id: i + 1, name: response.data.message, randomName: randomName})
+          updateDogs(prev => {return {...prev, dogPics: [...prev.dogPics, {pic:response.data.message, id: i + 1, name: response.data.message, randomName: randomName}]}})  
+        })
+        .catch(err => console.log(err));
+        }
+        console.log('IN FUNCTION pics array = ', dogs.dogPics)
+        // updateDogs(prev => {return {...prev, dogPics: apiDogPics}})  
+  }
+  // console.log('pics array = ', apiDogPics)
 
   function handleOnDragEnd(result) {
     if(!result.destination) {
@@ -112,7 +128,8 @@ console.log("dogs at initialization = ", dogs);
       </header>
       <div className="listContainer">
         <h2>Drag and drop these puppers to put them in order of most boopable!</h2>
-        <button onClick={event => updateDogs(prev => {return {...prev, refreshDogs: prev.refreshDogs += 1}})}>Show me dogs!</button>
+        {/* <button onClick={event => updateDogs(prev => {return {...prev, refreshDogs: prev.refreshDogs += 1}})}>Show me dogs!</button> */}
+        <button onClick={event => onButtonClick()}>Show me dogs!</button>
      
         <DragDropContext onDragEnd={handleOnDragEnd}>
           <Droppable droppableId="doggos">
