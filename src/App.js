@@ -13,6 +13,7 @@ function App() {
 const [state, setState] = useState(0);
 console.log('state = ', state)
 const [dogs, updateDogs] = useState({refreshDogs: 0, dogPics: [{pic: 'https://images.dog.ceo/breeds/terrier-irish/n02093991_1282.jpg', id: 1, name: 'https://images.dog.ceo/breeds/terrier-irish/n02093991_1282.jpg', randomName: "bob"}]});
+
 console.log("dogs at initialization = ", dogs);
 
  const dogPics = [{pic: 'https://images.dog.ceo/breeds/terrier-irish/n02093991_1282.jpg', id: 1, name: "bob"}, {pic: 'https://images.dog.ceo/breeds/kuvasz/n02104029_2656.jpg', id: 2, name: "frank"}, {pic: 'https://images.dog.ceo/breeds/havanese/00100trPORTRAIT_00100_BURST20191112123933390_COVER.jpg', id: 3, name: "joe"}];
@@ -20,45 +21,46 @@ console.log("dogs at initialization = ", dogs);
  const apiDogPics =[];
 
 //  console.log('dogs = ', dogs)
-//  if (dogs.length === 0) {
-//   for (let i = 0; i < 3; i++) {
-//         axios.get('https://dog.ceo/api/breeds/image/random')
-//       .then(response => {
-//         console.log('dog pic we got = ', response.data.message);
-//         // dogPics.push({pic: response.data.message, id: i + 1});
-//         //setState(prev => [...prev, {pic: response.data.message, id: i + 1}])
-//         // apiDogPics.push({pic:response.data.message, id: i + 1, name: response.data.message})
-//         let randomName = dogNames.maleRandom();
-//         updateDogs(prev => [...prev, {pic: response.data.message, id: i + 1, name: response.data.message, randomName: randomName}])
-//       })
-//       .catch(err => console.log(err));
-//       }
-
-//       console.log('apiDogPics at end of loop = ', apiDogPics)
-//       // updateDogs(apiDogPics);
-//  }
-
-
-// const apiDogPics = [];
-useEffect(() => {
-  console.log("inside the useEffect")
-  const apiDogPics = [];
+ if (dogs.dogPics.length === 1) {
   for (let i = 0; i < 3; i++) {
-    axios.get('https://dog.ceo/api/breeds/image/random')
-  .then(response => {
-    console.log('dog pic we got = ', response.data.message);
-    // dogPics.push({pic: response.data.message, id: i + 1});
-    //setState(prev => [...prev, {pic: response.data.message, id: i + 1}])
-    let randomName = dogNames.maleRandom();
-    apiDogPics.push({pic:response.data.message, id: i + 1, name: response.data.message, randomName: randomName})
-    
-    //updateDogs(prev => [...prev, {pic: response.data.message, id: i + 1, name: response.data.message, randomName: randomName}])
-  })
-  .catch(err => console.log(err));
-  }
-  // updateDogs(prev => apiDogPics)
-  updateDogs(prev => {return {...prev, dogPics: apiDogPics}})
-}, [dogs.refreshDogs])
+        axios.get('https://dog.ceo/api/breeds/image/random')
+      .then(response => {
+        console.log('dog pic we got = ', response.data.message);
+        // dogPics.push({pic: response.data.message, id: i + 1});
+        //setState(prev => [...prev, {pic: response.data.message, id: i + 1}])
+        // apiDogPics.push({pic:response.data.message, id: i + 1, name: response.data.message})
+        let randomName = dogNames.maleRandom();
+        //updateDogs(prev => [...prev, {pic: response.data.message, id: i + 1, name: response.data.message, randomName: randomName}])
+        apiDogPics.push({pic:response.data.message, id: i + 1, name: response.data.message, randomName: randomName})
+      })
+      .catch(err => console.log(err));
+      }
+      updateDogs(prev => {return {...prev, dogPics: apiDogPics}})
+      console.log('apiDogPics at end of loop = ', apiDogPics)
+      // updateDogs(apiDogPics);
+ }
+
+
+// // THIS IS THE USE EFFECT API CALL- DOES NOT WORK WELL
+// useEffect(() => {
+//   console.log("inside the useEffect")
+//   const apiDogPics = [];
+//   for (let i = 0; i < 3; i++) {
+//     axios.get('https://dog.ceo/api/breeds/image/random')
+//     .then(response => {
+//       console.log('dog pic we got = ', response.data.message);
+//       // dogPics.push({pic: response.data.message, id: i + 1});
+//       //setState(prev => [...prev, {pic: response.data.message, id: i + 1}])
+//       let randomName = dogNames.maleRandom();
+//       apiDogPics.push({pic:response.data.message, id: i + 1, name: response.data.message, randomName: randomName})
+      
+//       //updateDogs(prev => [...prev, {pic: response.data.message, id: i + 1, name: response.data.message, randomName: randomName}])
+//     })
+//     .catch(err => console.log(err));
+//   }
+//   // updateDogs(prev => apiDogPics)
+//   updateDogs(prev => {return {...prev, dogPics: apiDogPics}})
+// }, [dogs.refreshDogs])
 
 // console.log("apiDogPics = ", apiDogPics);
 
@@ -118,13 +120,15 @@ useEffect(() => {
               <ul className="dogListWrapper" {...provided.doppableProps} ref={provided.innerRef}>
                 {console.log('dogs in the return before the map = ', dogs)}
                 {console.log("what is dogs.dogPics? ", dogs.dogPics)}
-              {dogs.dogPics.map(({id, pic, name, randomName}, index) => {
+                <p>dog title here</p>
+                {dogs.dogPics.map(({id, pic, name, randomName}, index) => {
                 // let randomName = dogNames.maleRandom();
 
                 return (
                   <Draggable key={id} draggableId={name} index={index}>
                     {(provided) => (
                       <ol className="dogWrapper"{...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+
                         <div>
                           <img src={pic} alt="invisible doggo" className="dogPic"/>
                         </div>
