@@ -212,7 +212,7 @@ const [dogs, updateDogs] = useState({refreshDogs: 0, dogPics: [{pic: 'https://im
                   {dogs.fixedDogPics.map(({id, pic, name, randomName}, index) => {
 
                   return (
-                    <Draggable key={id} draggableId={name} index={index}>
+                    <Draggable key={randomName} draggableId={name} index={index}>
                       {(provided) => (
                         <ol className="dogWrapper"{...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
                           {console.log('INDEX = ', index)}
