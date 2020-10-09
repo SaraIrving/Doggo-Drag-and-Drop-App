@@ -13,9 +13,9 @@ function App() {
 const [state, setState] = useState(0);
 //console.log('state = ', state)
 
-const dogPics = [{pic: 'https://images.dog.ceo/breeds/terrier-irish/n02093991_1282.jpg', id: 1, name: "bob", randomName: "bobo"}, {pic: 'https://images.dog.ceo/breeds/kuvasz/n02104029_2656.jpg', id: 2, name: "frank", randomName: "fofo"}, {pic: 'https://images.dog.ceo/breeds/havanese/00100trPORTRAIT_00100_BURST20191112123933390_COVER.jpg', id: 3, name: "joe", randomName: "jojo"}];
+const fixedDogPics = [{pic: 'https://images.dog.ceo/breeds/terrier-irish/n02093991_1282.jpg', id: 1, name: "bob", randomName: "bobo"}, {pic: 'https://images.dog.ceo/breeds/kuvasz/n02104029_2656.jpg', id: 2, name: "frank", randomName: "fofo"}, {pic: 'https://images.dog.ceo/breeds/havanese/00100trPORTRAIT_00100_BURST20191112123933390_COVER.jpg', id: 3, name: "joe", randomName: "jojo"}];
 
-const [dogs, updateDogs] = useState({refreshDogs: 0, dogPics: [{pic: 'https://images.dog.ceo/breeds/terrier-irish/n02093991_1282.jpg', id: 0, name: 'https://images.dog.ceo/breeds/terrier-irish/n02093991_1282.jpg', randomName: "bob"}], fixedDogPics: dogPics});
+const [dogs, updateDogs] = useState({refreshDogs: 0, dogPics: [{pic: 'https://images.dog.ceo/breeds/terrier-irish/n02093991_1282.jpg', id: 0, name: 'https://images.dog.ceo/breeds/terrier-irish/n02093991_1282.jpg', randomName: "bob"}], fixedDogPics: fixedDogPics});
 
 //console.log("dogs at initialization = ", dogs);
 
@@ -147,8 +147,6 @@ const [dogs, updateDogs] = useState({refreshDogs: 0, dogPics: [{pic: 'https://im
       }
       
     }
-
-
     // const items = Array.from(dogs.dogPics);
     // const [reorderedItem] = items.splice(result.source.index, 1);
     // items.splice(result.destination.index, 0, reorderedItem);
@@ -157,6 +155,29 @@ const [dogs, updateDogs] = useState({refreshDogs: 0, dogPics: [{pic: 'https://im
     // // console.log('items = ', items);
     // //updateDogs(items);
     // updateDogs(prev => {return {...prev, dogPics: items}})
+  }
+
+  function deleteDog(provided) {
+    //have the name of the dog we clicked on
+    //use that to find the desired object in the fixed dogs array and delete it??
+
+    console.log('provided in DELETE = ', provided)
+    console.log("delete this DOG!!")
+    console.log("IN DELETE fixed dogs = ", dogs.fixedDogPics)
+
+    const dogArray = Array.from(dogs.fixedDogPics)
+    console.log('dogArray at start = ', dogArray)
+    for (let i = 0; i < dogArray.length; i++) {
+      console.log(dogArray[i].name)
+      console.log(provided.dragHandleProps["data-rbd-drag-handle-draggable-id"])
+      if (dogArray[i].name === provided.dragHandleProps["data-rbd-drag-handle-draggable-id"]) {
+        dogArray.splice(i, 1)
+        console.log('dogArray after removal', dogArray)
+      }
+    }
+
+    updateDogs(prev => {return {...prev, fixedDogPics: dogArray}})
+
   }
 
   //console.log('dogs state before the return = ', dogs);
@@ -180,11 +201,11 @@ const [dogs, updateDogs] = useState({refreshDogs: 0, dogPics: [{pic: 'https://im
                 <ul className="dogListWrapper" {...provided.doppableProps} ref={provided.innerRef}>
                   {console.log('api Droppable provided = ', provided)}
               
-                  <p>dog title here</p>
+                  <p>New Doggos</p>
                   {dogs.dogPics.map(({id, pic, name, randomName}, index) => {
 
                   return (
-                    <Draggable key={id} draggableId={name} index={index}>
+                    <Draggable key={randomName + name} draggableId={name} index={index}>
                       {(provided) => (
                         <ol className="dogWrapper"{...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
                           {console.log('api Draggable provided = ', provided)}
@@ -208,11 +229,11 @@ const [dogs, updateDogs] = useState({refreshDogs: 0, dogPics: [{pic: 'https://im
               {(provided) => (
                 <ul className="dogListWrapper" {...provided.doppableProps} ref={provided.innerRef}>
                   {console.log('fixed Droppable provided = ', provided)}
-                  <p>fixed title here</p>
+                  <p>Keepers</p>
                   {dogs.fixedDogPics.map(({id, pic, name, randomName}, index) => {
 
                   return (
-                    <Draggable key={randomName} draggableId={name} index={index}>
+                    <Draggable key={randomName + name} draggableId={name} index={index}>
                       {(provided) => (
                         <ol className="dogWrapper"{...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
                           {console.log('INDEX = ', index)}
@@ -225,6 +246,7 @@ const [dogs, updateDogs] = useState({refreshDogs: 0, dogPics: [{pic: 'https://im
                           <p>
                             This Good Boi's name is: {randomName}
                           </p>
+                          <button onClick={event => deleteDog(provided)}>Send him to the pound!</button>
                         </ol>
                       )} 
                     </Draggable>
