@@ -11,12 +11,15 @@ const dogNames = require('dog-names');
 function App() {
 
 const [state, setState] = useState(0);
-console.log('state = ', state)
-const [dogs, updateDogs] = useState({refreshDogs: 0, dogPics: [{pic: 'https://images.dog.ceo/breeds/terrier-irish/n02093991_1282.jpg', id: 0, name: 'https://images.dog.ceo/breeds/terrier-irish/n02093991_1282.jpg', randomName: "bob"}]});
+//console.log('state = ', state)
 
-console.log("dogs at initialization = ", dogs);
+const dogPics = [{pic: 'https://images.dog.ceo/breeds/terrier-irish/n02093991_1282.jpg', id: 1, name: "bob", randomName: "bobo"}, {pic: 'https://images.dog.ceo/breeds/kuvasz/n02104029_2656.jpg', id: 2, name: "frank", randomName: "fofo"}, {pic: 'https://images.dog.ceo/breeds/havanese/00100trPORTRAIT_00100_BURST20191112123933390_COVER.jpg', id: 3, name: "joe", randomName: "jojo"}];
 
- const dogPics = [{pic: 'https://images.dog.ceo/breeds/terrier-irish/n02093991_1282.jpg', id: 1, name: "bob"}, {pic: 'https://images.dog.ceo/breeds/kuvasz/n02104029_2656.jpg', id: 2, name: "frank"}, {pic: 'https://images.dog.ceo/breeds/havanese/00100trPORTRAIT_00100_BURST20191112123933390_COVER.jpg', id: 3, name: "joe"}];
+const [dogs, updateDogs] = useState({refreshDogs: 0, dogPics: [{pic: 'https://images.dog.ceo/breeds/terrier-irish/n02093991_1282.jpg', id: 0, name: 'https://images.dog.ceo/breeds/terrier-irish/n02093991_1282.jpg', randomName: "bob"}], fixedDogPics: dogPics});
+
+//console.log("dogs at initialization = ", dogs);
+
+ 
 
  const apiDogPics =[];
 
@@ -96,7 +99,7 @@ console.log("dogs at initialization = ", dogs);
         })
         .catch(err => console.log(err));
         }
-        console.log('IN FUNCTION pics array = ', dogs.dogPics)
+        //console.log('IN FUNCTION pics array = ', dogs.dogPics)
         // updateDogs(prev => {return {...prev, dogPics: apiDogPics}})  
   }
   // console.log('pics array = ', apiDogPics)
@@ -105,19 +108,19 @@ console.log("dogs at initialization = ", dogs);
     if(!result.destination) {
       return;
     }
-    console.log('result = ', result);
+    //console.log('result = ', result);
     // const items = Array.from(dogPics);
     const items = Array.from(dogs.dogPics);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
 
-    console.log("calling updateDogs!")
-    console.log('items = ', items);
+    // console.log("calling updateDogs!")
+    // console.log('items = ', items);
     //updateDogs(items);
     updateDogs(prev => {return {...prev, dogPics: items}})
   }
 
-  console.log('dogs state before the return = ', dogs);
+  //console.log('dogs state before the return = ', dogs);
 
   return (
     <div className="App">
@@ -130,38 +133,71 @@ console.log("dogs at initialization = ", dogs);
         <h2>Drag and drop these puppers to put them in order of most boopable!</h2>
         {/* <button onClick={event => updateDogs(prev => {return {...prev, refreshDogs: prev.refreshDogs += 1}})}>Show me dogs!</button> */}
         <button onClick={event => onButtonClick()}>Show me dogs!</button>
-     
-        <DragDropContext onDragEnd={handleOnDragEnd}>
-          <Droppable droppableId="doggos">
-            {(provided) => (
-              <ul className="dogListWrapper" {...provided.doppableProps} ref={provided.innerRef}>
-                {console.log('dogs in the return before the map = ', dogs)}
-                {console.log("what is dogs.dogPics? ", dogs.dogPics)}
-                <p>dog title here</p>
-                {dogs.dogPics.map(({id, pic, name, randomName}, index) => {
-                // let randomName = dogNames.maleRandom();
+       
+          <DragDropContext onDragEnd={handleOnDragEnd}>
+            <div className="dragDropContextWrapper">
+            <Droppable droppableId="doggos">
+              {(provided) => (
+                <ul className="dogListWrapper" {...provided.doppableProps} ref={provided.innerRef}>
+                  {console.log('provided = ', provided)}
+                  {/* {console.log('dogs in the return before the map = ', dogs)}
+                  {console.log("what is dogs.dogPics? ", dogs.dogPics)} */}
+                  <p>dog title here</p>
+                  {dogs.dogPics.map(({id, pic, name, randomName}, index) => {
+                  // let randomName = dogNames.maleRandom();
 
-                return (
-                  <Draggable key={id} draggableId={name} index={index}>
-                    {(provided) => (
-                      <ol className="dogWrapper"{...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                  return (
+                    <Draggable key={id} draggableId={name} index={index}>
+                      {(provided) => (
+                        <ol className="dogWrapper"{...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
 
-                        <div>
-                          <img src={pic} alt="invisible doggo" className="dogPic"/>
-                        </div>
-                        <p>
-                          This Good Boi's name is: {randomName}
-                        </p>
-                      </ol>
-                    )} 
-                  </Draggable>
-                );
-                })}
-                {provided.placeholder}
-            </ul>
-            )}
-          </Droppable>
-        </DragDropContext>
+                          <div>
+                            <img src={pic} alt="invisible doggo" className="dogPic"/>
+                          </div>
+                          <p>
+                            This Good Boi's name is: {randomName}
+                          </p>
+                        </ol>
+                      )} 
+                    </Draggable>
+                  );
+                  })}
+                  {provided.placeholder}
+              </ul>
+              )}
+            </Droppable>
+            <Droppable droppableId="keepers">
+              {(provided) => (
+                <ul className="dogListWrapper" {...provided.doppableProps} ref={provided.innerRef}>
+                  {console.log('dogs in the return before the map = ', dogs)}
+                  {console.log("what is dogs.dogPics? ", dogs.dogPics)}
+                  <p>dog title here</p>
+                  {dogs.fixedDogPics.map(({id, pic, name, randomName}, index) => {
+                  // let randomName = dogNames.maleRandom();
+
+                  return (
+                    <Draggable key={id} draggableId={name} index={index}>
+                      {(provided) => (
+                        <ol className="dogWrapper"{...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+
+                          <div>
+                            <img src={pic} alt="invisible doggo" className="dogPic"/>
+                          </div>
+                          <p>
+                            This Good Boi's name is: {randomName}
+                          </p>
+                        </ol>
+                      )} 
+                    </Draggable>
+                  );
+                  })}
+                  {provided.placeholder}
+              </ul>
+              )}
+            </Droppable>
+            </div>
+          </DragDropContext>
+       
       </div>
     </div>
   );
