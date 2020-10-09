@@ -108,16 +108,55 @@ const [dogs, updateDogs] = useState({refreshDogs: 0, dogPics: [{pic: 'https://im
     if(!result.destination) {
       return;
     }
-    //console.log('result = ', result);
+    console.log('***result = ', result);
     // const items = Array.from(dogPics);
-    const items = Array.from(dogs.dogPics);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
 
-    // console.log("calling updateDogs!")
-    // console.log('items = ', items);
-    //updateDogs(items);
-    updateDogs(prev => {return {...prev, dogPics: items}})
+    if (result.destination.droppableId === "doggos" && result.source.droppableId === "doggos") {
+      const items = Array.from(dogs.dogPics);
+      const [reorderedItem] = items.splice(result.source.index, 1);
+      items.splice(result.destination.index, 0, reorderedItem);
+  
+      // console.log("calling updateDogs!")
+      // console.log('items = ', items);
+      //updateDogs(items);
+      updateDogs(prev => {return {...prev, dogPics: items}})
+
+    } else if (result.destination.droppableId === "keepers" && result.source.droppableId === "keepers") {
+      const items = Array.from(dogs.fixedDogPics);
+      const [reorderedItem] = items.splice(result.source.index, 1);
+      console.log("IN KEEPERS = ", reorderedItem)
+      items.splice(result.destination.index, 0, reorderedItem);
+  
+      // console.log("calling updateDogs!")
+      // console.log('items = ', items);
+      //updateDogs(items);
+      updateDogs(prev => {return {...prev, fixedDogPics: items}})
+
+    } else if (result.destination.droppableId !== result.source.droppableId) {
+      console.log("you're switching LISTS!!")
+      if (result.destination.droppableId === "keepers") {
+        // console.log('items in SWITCH = ', Array.from(dogs.fixedDogPics));
+        const items = Array.from(dogs.fixedDogPics);
+        const [reorderedItem] = dogs.dogPics.splice(result.source.index, 1);
+        // console.log('IN SWITCH reordered item = ', reorderedItem)
+        items.splice(result.destination.index, 0, reorderedItem)
+        // console.log('AFTER items in SWITCH = ', items)
+
+        updateDogs(prev => {return {...prev, fixedDogPics: items}})
+
+      }
+      
+    }
+
+
+    // const items = Array.from(dogs.dogPics);
+    // const [reorderedItem] = items.splice(result.source.index, 1);
+    // items.splice(result.destination.index, 0, reorderedItem);
+
+    // // console.log("calling updateDogs!")
+    // // console.log('items = ', items);
+    // //updateDogs(items);
+    // updateDogs(prev => {return {...prev, dogPics: items}})
   }
 
   //console.log('dogs state before the return = ', dogs);
@@ -139,17 +178,16 @@ const [dogs, updateDogs] = useState({refreshDogs: 0, dogPics: [{pic: 'https://im
             <Droppable droppableId="doggos">
               {(provided) => (
                 <ul className="dogListWrapper" {...provided.doppableProps} ref={provided.innerRef}>
-                  {console.log('provided = ', provided)}
-                  {/* {console.log('dogs in the return before the map = ', dogs)}
-                  {console.log("what is dogs.dogPics? ", dogs.dogPics)} */}
+                  {console.log('api Droppable provided = ', provided)}
+              
                   <p>dog title here</p>
                   {dogs.dogPics.map(({id, pic, name, randomName}, index) => {
-                  // let randomName = dogNames.maleRandom();
 
                   return (
                     <Draggable key={id} draggableId={name} index={index}>
                       {(provided) => (
                         <ol className="dogWrapper"{...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                          {console.log('api Draggable provided = ', provided)}
 
                           <div>
                             <img src={pic} alt="invisible doggo" className="dogPic"/>
@@ -169,16 +207,17 @@ const [dogs, updateDogs] = useState({refreshDogs: 0, dogPics: [{pic: 'https://im
             <Droppable droppableId="keepers">
               {(provided) => (
                 <ul className="dogListWrapper" {...provided.doppableProps} ref={provided.innerRef}>
-                  {console.log('dogs in the return before the map = ', dogs)}
-                  {console.log("what is dogs.dogPics? ", dogs.dogPics)}
-                  <p>dog title here</p>
+                  {console.log('fixed Droppable provided = ', provided)}
+                  <p>fixed title here</p>
                   {dogs.fixedDogPics.map(({id, pic, name, randomName}, index) => {
-                  // let randomName = dogNames.maleRandom();
 
                   return (
                     <Draggable key={id} draggableId={name} index={index}>
                       {(provided) => (
                         <ol className="dogWrapper"{...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                          {console.log('INDEX = ', index)}
+                          {console.log('ID = ', id)}
+                          {console.log('fixed Draggable provided = ', provided)}
 
                           <div>
                             <img src={pic} alt="invisible doggo" className="dogPic"/>
