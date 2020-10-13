@@ -216,7 +216,7 @@ const [dogs, updateDogs] = useState({refreshDogs: 0, dogPics: [{pic: 'https://im
                                 <img src={pic} alt="invisible doggo" className="dogPic"/>
                               </div>
                               <p>
-                                This Good Boi's name is: {randomName}
+                                This Good Boi's name is: <br></br><span>{randomName}</span>
                               </p>
                             </ol>
                           )} 
@@ -249,7 +249,7 @@ const [dogs, updateDogs] = useState({refreshDogs: 0, dogPics: [{pic: 'https://im
                                 <img src={pic} alt="invisible doggo" className="dogPic"/>
                               </div>
                               <p>
-                                This Good Boi's name is: {randomName}
+                                This Good Boi's name is: <br></br><span>{randomName}</span>
                               </p>
                               <button onClick={event => deleteDog(provided)}>Send him to the pound!</button>
                             </ol>
