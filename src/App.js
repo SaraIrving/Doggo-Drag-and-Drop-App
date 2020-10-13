@@ -197,7 +197,7 @@ const [dogs, updateDogs] = useState({refreshDogs: 0, dogPics: [{pic: 'https://im
           <DragDropContext onDragEnd={handleOnDragEnd}>
             <div className="dragDropContextWrapper">
               <div className="newDoggoWrapper">
-                <p>New Doggos</p>
+                <h2 className="listTitle">New Doggos</h2>
                 <Droppable droppableId="doggos">
                   {(provided) => (
                     <ul className="dogListWrapper" {...provided.doppableProps} ref={provided.innerRef}>
@@ -229,7 +229,7 @@ const [dogs, updateDogs] = useState({refreshDogs: 0, dogPics: [{pic: 'https://im
                 </Droppable>
               </div>
               <div className="keepersWrapper">
-                <p>Keepers</p>
+                <h2 className="listTitle">Keepers</h2>
                 <Droppable droppableId="keepers">
                   {(provided) => (
                     <ul className="dogListWrapper" {...provided.doppableProps} ref={provided.innerRef}>
