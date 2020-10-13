@@ -196,66 +196,72 @@ const [dogs, updateDogs] = useState({refreshDogs: 0, dogPics: [{pic: 'https://im
        
           <DragDropContext onDragEnd={handleOnDragEnd}>
             <div className="dragDropContextWrapper">
-            <Droppable droppableId="doggos">
-              {(provided) => (
-                <ul className="dogListWrapper" {...provided.doppableProps} ref={provided.innerRef}>
-                  {console.log('api Droppable provided = ', provided)}
-              
-                  <p>New Doggos</p>
-                  {dogs.dogPics.map(({id, pic, name, randomName}, index) => {
+              <div className="newDoggoWrapper">
+                <p>New Doggos</p>
+                <Droppable droppableId="doggos">
+                  {(provided) => (
+                    <ul className="dogListWrapper" {...provided.doppableProps} ref={provided.innerRef}>
+                      {console.log('api Droppable provided = ', provided)}
+                  
+                      {/* <p>New Doggos</p> */}
+                      {dogs.dogPics.map(({id, pic, name, randomName}, index) => {
 
-                  return (
-                    <Draggable key={randomName + name} draggableId={name} index={index}>
-                      {(provided) => (
-                        <ol className="dogWrapper"{...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                          {console.log('api Draggable provided = ', provided)}
+                      return (
+                        <Draggable key={randomName + name} draggableId={name} index={index}>
+                          {(provided) => (
+                            <ol className="dogWrapper"{...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                              {console.log('api Draggable provided = ', provided)}
 
-                          <div>
-                            <img src={pic} alt="invisible doggo" className="dogPic"/>
-                          </div>
-                          <p>
-                            This Good Boi's name is: {randomName}
-                          </p>
-                        </ol>
-                      )} 
-                    </Draggable>
-                  );
-                  })}
-                  {provided.placeholder}
-              </ul>
-              )}
-            </Droppable>
-            <Droppable droppableId="keepers">
-              {(provided) => (
-                <ul className="dogListWrapper" {...provided.doppableProps} ref={provided.innerRef}>
-                  {console.log('fixed Droppable provided = ', provided)}
-                  <p>Keepers</p>
-                  {dogs.fixedDogPics.map(({id, pic, name, randomName}, index) => {
+                              <div>
+                                <img src={pic} alt="invisible doggo" className="dogPic"/>
+                              </div>
+                              <p>
+                                This Good Boi's name is: {randomName}
+                              </p>
+                            </ol>
+                          )} 
+                        </Draggable>
+                      );
+                      })}
+                      {provided.placeholder}
+                  </ul>
+                  )}
+                </Droppable>
+              </div>
+              <div className="keepersWrapper">
+                <p>Keepers</p>
+                <Droppable droppableId="keepers">
+                  {(provided) => (
+                    <ul className="dogListWrapper" {...provided.doppableProps} ref={provided.innerRef}>
+                      {console.log('fixed Droppable provided = ', provided)}
+                      {/* <p>Keepers</p> */}
+                      {dogs.fixedDogPics.map(({id, pic, name, randomName}, index) => {
 
-                  return (
-                    <Draggable key={randomName + name} draggableId={name} index={index}>
-                      {(provided) => (
-                        <ol className="dogWrapper"{...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                          {console.log('INDEX = ', index)}
-                          {console.log('ID = ', id)}
-                          {console.log('fixed Draggable provided = ', provided)}
+                      return (
+                        <Draggable key={randomName + name} draggableId={name} index={index}>
+                          {(provided) => (
+                            <ol className="dogWrapper"{...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                              {console.log('INDEX = ', index)}
+                              {console.log('ID = ', id)}
+                              {console.log('fixed Draggable provided = ', provided)}
 
-                          <div>
-                            <img src={pic} alt="invisible doggo" className="dogPic"/>
-                          </div>
-                          <p>
-                            This Good Boi's name is: {randomName}
-                          </p>
-                          <button onClick={event => deleteDog(provided)}>Send him to the pound!</button>
-                        </ol>
-                      )} 
-                    </Draggable>
-                  );
-                  })}
-                  {provided.placeholder}
-              </ul>
-              )}
-            </Droppable>
+                              <div>
+                                <img src={pic} alt="invisible doggo" className="dogPic"/>
+                              </div>
+                              <p>
+                                This Good Boi's name is: {randomName}
+                              </p>
+                              <button onClick={event => deleteDog(provided)}>Send him to the pound!</button>
+                            </ol>
+                          )} 
+                        </Draggable>
+                      );
+                      })}
+                      {provided.placeholder}
+                  </ul>
+                  )}
+                </Droppable>
+              </div>
             </div>
           </DragDropContext>
        
