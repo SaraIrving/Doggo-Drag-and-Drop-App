@@ -3,6 +3,7 @@ import {useState} from 'react';
 import axios from 'axios';
 import './App.css';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import Button from './components/Button';
 const dogNames = require('dog-names');
 
 
@@ -86,7 +87,8 @@ function App() {
       </header>
       <div className="listContainer">
         <h2>Drag and drop these puppers to put them in order of most boopable!</h2>
-        <button onClick={event => onButtonClick()}>Show me dogs!</button>
+        {/* <button onClick={event => onButtonClick()}>Show me dogs!</button> */}
+        <Button onClick={event => onButtonClick()} text="Show me dogs!"></Button>
           <DragDropContext onDragEnd={handleOnDragEnd}>
             <div className="dragDropContextWrapper">
               <div className="newDoggoWrapper">
@@ -133,7 +135,8 @@ function App() {
                               <p>
                                 This Good Boi's name is: <br></br><span>{randomName}</span>
                               </p>
-                              <button onClick={event => deleteDog(provided)}>Send him to the pound!</button>
+                              <Button onClick={event => deleteDog(provided)} text="Send him to the farm!"></Button>
+                              {/* <button onClick={event => deleteDog(provided)}>Send him to the pound!</button> */}
                             </ol>
                           )} 
                         </Draggable>
