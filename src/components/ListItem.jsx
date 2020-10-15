@@ -45,7 +45,8 @@ export default function ListItem (props) {
           <p>
             This Good Boi's name is: <br></br><span>{props.randomName}</span>
           </p>
-          <Button onClick={event => deleteDog(provided)} text="Send him to the farm!"></Button>
+          {props.type === "keepers" && <Button onClick={event => deleteDog(provided)} text="Send him to the farm!"></Button>}
+          {/* <Button onClick={event => deleteDog(provided)} text="Send him to the farm!"></Button> */}
           {/* <button onClick={event => deleteDog(provided)}>Send him to the pound!</button> */}
         </ol>
       )} 

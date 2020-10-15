@@ -101,18 +101,19 @@ function App() {
                       {dogs.dogPics.map(({id, pic, name, randomName}, index) => {
 
                       return (
-                        <Draggable key={randomName + name} draggableId={name} index={index}>
-                          {(provided) => (
-                            <ol className="dogWrapper"{...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                              <div>
-                                <img src={pic} alt="invisible doggo" className="dogPic"/>
-                              </div>
-                              <p>
-                                This Good Boi's name is: <br></br><span>{randomName}</span>
-                              </p>
-                            </ol>
-                          )} 
-                        </Draggable>
+                        // <Draggable key={randomName + name} draggableId={name} index={index}>
+                        //   {(provided) => (
+                        //     <ol className="dogWrapper"{...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                        //       <div>
+                        //         <img src={pic} alt="invisible doggo" className="dogPic"/>
+                        //       </div>
+                        //       <p>
+                        //         This Good Boi's name is: <br></br><span>{randomName}</span>
+                        //       </p>
+                        //     </ol>
+                        //   )} 
+                        // </Draggable>
+                        <ListItem type="doggos" key={randomName + name} draggableId={name} index={index} pic={pic} randomName={randomName}></ListItem>
                       );
                       })}
                       {provided.placeholder}
@@ -144,7 +145,7 @@ function App() {
                         //   )} 
                         // </Draggable>
 
-                        <ListItem key={randomName + name} draggableId={name} index={index} pic={pic} id={id} dogs={dogs} updateDogs={updateDogs}></ListItem>
+                        <ListItem type="keepers" key={randomName + name} draggableId={name} index={index} randomName={randomName} pic={pic} id={id} dogs={dogs} updateDogs={updateDogs}></ListItem>
                      
                       );
                       })}
