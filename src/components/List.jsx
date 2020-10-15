@@ -3,12 +3,13 @@ import { Droppable } from "react-beautiful-dnd";
 import ListItem from './ListItem';
 
 export default function List (props) {
+  console.log('props in LIST = ', props)
 
   return (
     <div>
       <Droppable droppableId={props.droppableId}>
         {(provided) => (
-          <ul className="dogListWrapper" {...provided.doppableProps} ref={provided.innerRef}>
+          <ul className="dogListWrapper" {...provided.droppableProps} ref={provided.innerRef}>
             {props.dogs.fixedDogPics.map(({id, pic, name, randomName}, index) => {
 
             return (

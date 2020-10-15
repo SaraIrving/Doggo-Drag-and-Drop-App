@@ -96,25 +96,14 @@ function App() {
             <div className="dragDropContextWrapper">
               <div className="newDoggoWrapper">
                 <h2 className="listTitle">New Doggos</h2>
+                {/* <List dogs={dogs} updateDogs={updateDogs} droppableId="doggos" listItemType="doggos"></List> */}
                 <Droppable droppableId="doggos">
                   {(provided) => (
                     <ul className="dogListWrapper" {...provided.doppableProps} ref={provided.innerRef}>
                       {dogs.dogPics.map(({id, pic, name, randomName}, index) => {
 
                       return (
-                        // <Draggable key={randomName + name} draggableId={name} index={index}>
-                        //   {(provided) => (
-                        //     <ol className="dogWrapper"{...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                        //       <div>
-                        //         <img src={pic} alt="invisible doggo" className="dogPic"/>
-                        //       </div>
-                        //       <p>
-                        //         This Good Boi's name is: <br></br><span>{randomName}</span>
-                        //       </p>
-                        //     </ol>
-                        //   )} 
-                        // </Draggable>
-                        <ListItem type="doggos" key={randomName + name} draggableId={name} index={index} pic={pic} randomName={randomName}></ListItem>
+                        <ListItem listItemType="doggos" key={randomName + name} draggableId={name} index={index} pic={pic} randomName={randomName}></ListItem>
                       );
                       })}
                       {provided.placeholder}
@@ -124,7 +113,7 @@ function App() {
               </div>
               <div className="keepersWrapper">
                 <h2 className="listTitle">Keepers</h2>
-                <List dogs={dogs} updateDogs={updateDogs} droppableId={"keepers"} listItemType="keepers"></List>
+                <List dogs={dogs} updateDogs={updateDogs} droppableId="keepers" listItemType="keepers"></List>
               </div>
             </div>
           </DragDropContext>
