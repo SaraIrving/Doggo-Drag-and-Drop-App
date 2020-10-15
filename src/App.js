@@ -65,19 +65,20 @@ function App() {
     }
   }
 
-  function deleteDog(provided) {
-    //have the name of the dog we clicked on
-    //use that to find the desired object in the fixed dogs array and delete it??
+  //THIS FUNCTION IS MOVED INTO LISTITEM COMPONENT
+  // function deleteDog(provided) {
+  //   //have the name of the dog we clicked on
+  //   //use that to find the desired object in the fixed dogs array and delete it??
 
-    const dogArray = Array.from(dogs.fixedDogPics)
-    for (let i = 0; i < dogArray.length; i++) {
-      if (dogArray[i].name === provided.dragHandleProps["data-rbd-drag-handle-draggable-id"]) {
-        dogArray.splice(i, 1)
-      }
-    }
+  //   const dogArray = Array.from(dogs.fixedDogPics)
+  //   for (let i = 0; i < dogArray.length; i++) {
+  //     if (dogArray[i].name === provided.dragHandleProps["data-rbd-drag-handle-draggable-id"]) {
+  //       dogArray.splice(i, 1)
+  //     }
+  //   }
 
-    updateDogs(prev => {return {...prev, fixedDogPics: dogArray}})
-  }
+  //   updateDogs(prev => {return {...prev, fixedDogPics: dogArray}})
+  // }
 
   return (
     <div className="App">
@@ -143,7 +144,7 @@ function App() {
                         //   )} 
                         // </Draggable>
 
-                        <ListItem key={randomName + name} draggableId={name} index={index} pic={pic} id={id} onClick={event => deleteDog(provided)}></ListItem>
+                        <ListItem key={randomName + name} draggableId={name} index={index} pic={pic} id={id} dogs={dogs} updateDogs={updateDogs}></ListItem>
                      
                       );
                       })}
