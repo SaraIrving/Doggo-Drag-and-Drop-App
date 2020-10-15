@@ -4,6 +4,7 @@ import axios from 'axios';
 import './App.css';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import Button from './components/Button';
+import ListItem from './components/ListItem';
 const dogNames = require('dog-names');
 
 
@@ -126,20 +127,24 @@ function App() {
                       {dogs.fixedDogPics.map(({id, pic, name, randomName}, index) => {
 
                       return (
-                        <Draggable key={randomName + name} draggableId={name} index={index}>
-                          {(provided) => (
-                            <ol className="dogWrapper"{...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                              <div>
-                                <img src={pic} alt="invisible doggo" className="dogPic"/>
-                              </div>
-                              <p>
-                                This Good Boi's name is: <br></br><span>{randomName}</span>
-                              </p>
-                              <Button onClick={event => deleteDog(provided)} text="Send him to the farm!"></Button>
-                              {/* <button onClick={event => deleteDog(provided)}>Send him to the pound!</button> */}
-                            </ol>
-                          )} 
-                        </Draggable>
+                        // THIS IS MOVED INTO LIST ITEM COMPONENT!
+                        // <Draggable key={randomName + name} draggableId={name} index={index}>
+                        //   {(provided) => (
+                        //     <ol className="dogWrapper"{...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                        //       <div>
+                        //         <img src={pic} alt="invisible doggo" className="dogPic"/>
+                        //       </div>
+                        //       <p>
+                        //         This Good Boi's name is: <br></br><span>{randomName}</span>
+                        //       </p>
+                        //       <Button onClick={event => deleteDog(provided)} text="Send him to the farm!"></Button>
+                        //       {/* <button onClick={event => deleteDog(provided)}>Send him to the pound!</button> */}
+                        //     </ol>
+                        //   )} 
+                        // </Draggable>
+
+                        <ListItem key={randomName + name} draggableId={name} index={index} pic={pic} id={id} onClick={event => deleteDog(provided)}></ListItem>
+                     
                       );
                       })}
                       {provided.placeholder}
