@@ -13,7 +13,7 @@ export default function List (props) {
 
             return (
 
-              <ListItem type={props.listItemType} key={randomName + name} draggableId={name} index={index} randomName={randomName} pic={pic} id={id} dogs={props.dogs} updateDogs={props.updateDogs}></ListItem>
+              <ListItem listItemType={props.listItemType} key={randomName + name} draggableId={name} index={index} randomName={randomName} pic={pic} id={id} dogs={props.dogs} updateDogs={props.updateDogs}></ListItem>
             
             );
             })}

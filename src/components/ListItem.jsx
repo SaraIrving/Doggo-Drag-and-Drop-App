@@ -35,7 +35,7 @@ export default function ListItem (props) {
           <p>
             This Good Boi's name is: <br></br><span>{props.randomName}</span>
           </p>
-          {props.type === "keepers" && <Button onClick={event => deleteDog(provided)} text="Send him to the farm!"></Button>}
+          {props.listItemType === "keepers" && <Button onClick={event => deleteDog(provided)} text="Send him to the farm!"></Button>}
         </ol>
       )} 
     </Draggable>
