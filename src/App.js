@@ -5,6 +5,7 @@ import './App.css';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import Button from './components/Button';
 import ListItem from './components/ListItem';
+import List from './components/List';
 const dogNames = require('dog-names');
 
 
@@ -123,40 +124,10 @@ function App() {
               </div>
               <div className="keepersWrapper">
                 <h2 className="listTitle">Keepers</h2>
-                <Droppable droppableId="keepers">
-                  {(provided) => (
-                    <ul className="dogListWrapper" {...provided.doppableProps} ref={provided.innerRef}>
-                      {dogs.fixedDogPics.map(({id, pic, name, randomName}, index) => {
-
-                      return (
-                        // THIS IS MOVED INTO LIST ITEM COMPONENT!
-                        // <Draggable key={randomName + name} draggableId={name} index={index}>
-                        //   {(provided) => (
-                        //     <ol className="dogWrapper"{...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                        //       <div>
-                        //         <img src={pic} alt="invisible doggo" className="dogPic"/>
-                        //       </div>
-                        //       <p>
-                        //         This Good Boi's name is: <br></br><span>{randomName}</span>
-                        //       </p>
-                        //       <Button onClick={event => deleteDog(provided)} text="Send him to the farm!"></Button>
-                        //       {/* <button onClick={event => deleteDog(provided)}>Send him to the pound!</button> */}
-                        //     </ol>
-                        //   )} 
-                        // </Draggable>
-
-                        <ListItem type="keepers" key={randomName + name} draggableId={name} index={index} randomName={randomName} pic={pic} id={id} dogs={dogs} updateDogs={updateDogs}></ListItem>
-                     
-                      );
-                      })}
-                      {provided.placeholder}
-                  </ul>
-                  )}
-                </Droppable>
+                <List dogs={dogs} updateDogs={updateDogs}></List>
               </div>
             </div>
           </DragDropContext>
-       
       </div>
     </div>
   );

@@ -5,17 +5,25 @@ import ListItem from './ListItem';
 export default function List (props) {
 
   return (
-    <div className="dogListWrapper">
-      <Droppable droppableId={props.item_id}>
-        {provided => (
-          <div {...provided.droppableProps} ref={provided.innerRef}>
-            {props.state.map(doggObj => (
-            <ListItem item={doggObj.pic} key={doggObj.id} />
-            ))} 
-          </div>
-        )}
-      </Droppable>
+    <div>
+        <Droppable droppableId="keepers">
+      {(provided) => (
+        <ul className="dogListWrapper" {...provided.doppableProps} ref={provided.innerRef}>
+          {props.dogs.fixedDogPics.map(({id, pic, name, randomName}, index) => {
+
+          return (
+
+            <ListItem type="keepers" key={randomName + name} draggableId={name} index={index} randomName={randomName} pic={pic} id={id} dogs={props.dogs} updateDogs={props.updateDogs}></ListItem>
+          
+          );
+          })}
+          {provided.placeholder}
+      </ul>
+      )}
+    </Droppable>
+
     </div>
+  
 
   )
 }
