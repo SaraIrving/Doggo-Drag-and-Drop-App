@@ -124,7 +124,7 @@ function App() {
               </div>
               <div className="keepersWrapper">
                 <h2 className="listTitle">Keepers</h2>
-                <List dogs={dogs} updateDogs={updateDogs}></List>
+                <List dogs={dogs} updateDogs={updateDogs} droppableId={"keepers"} listItemType="keepers"></List>
               </div>
             </div>
           </DragDropContext>

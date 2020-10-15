@@ -25,16 +25,6 @@ export default function ListItem (props) {
   }
 
   return (
-    // <Draggable draggableId ={props.id} index={props.index} >
-    //   {(provided) => (
-    //      <div className="dogWrapper" ref={provided.innerRef}
-    //      {...provided.draggableProps}
-    //      {...provided.dragHandleProps}>
-    //       <img src={props.item} alt="Doggo" className="dogPic"></img>
-    //       <p>This Good Boi's name is : {name}</p>
-    //      </div>
-    //   )}
-    // </Draggable>
 
     <Draggable key={props.randomName + props.name} draggableId={props.draggableId} index={props.index}>
       {(provided) => (
@@ -46,8 +36,6 @@ export default function ListItem (props) {
             This Good Boi's name is: <br></br><span>{props.randomName}</span>
           </p>
           {props.type === "keepers" && <Button onClick={event => deleteDog(provided)} text="Send him to the farm!"></Button>}
-          {/* <Button onClick={event => deleteDog(provided)} text="Send him to the farm!"></Button> */}
-          {/* <button onClick={event => deleteDog(provided)}>Send him to the pound!</button> */}
         </ol>
       )} 
     </Draggable>

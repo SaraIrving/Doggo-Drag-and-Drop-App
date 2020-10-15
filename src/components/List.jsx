@@ -6,24 +6,21 @@ export default function List (props) {
 
   return (
     <div>
-        <Droppable droppableId="keepers">
-      {(provided) => (
-        <ul className="dogListWrapper" {...provided.doppableProps} ref={provided.innerRef}>
-          {props.dogs.fixedDogPics.map(({id, pic, name, randomName}, index) => {
+      <Droppable droppableId={props.droppableId}>
+        {(provided) => (
+          <ul className="dogListWrapper" {...provided.doppableProps} ref={provided.innerRef}>
+            {props.dogs.fixedDogPics.map(({id, pic, name, randomName}, index) => {
 
-          return (
+            return (
 
-            <ListItem type="keepers" key={randomName + name} draggableId={name} index={index} randomName={randomName} pic={pic} id={id} dogs={props.dogs} updateDogs={props.updateDogs}></ListItem>
-          
-          );
-          })}
-          {provided.placeholder}
-      </ul>
-      )}
-    </Droppable>
-
+              <ListItem type={props.listItemType} key={randomName + name} draggableId={name} index={index} randomName={randomName} pic={pic} id={id} dogs={props.dogs} updateDogs={props.updateDogs}></ListItem>
+            
+            );
+            })}
+            {provided.placeholder}
+        </ul>
+        )}
+      </Droppable>
     </div>
-  
-
   )
 }
