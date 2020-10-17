@@ -96,8 +96,8 @@ function App() {
             <div className="dragDropContextWrapper">
               <div className="newDoggoWrapper">
                 <h2 className="listTitle">New Doggos</h2>
-                {/* <List dogs={dogs} updateDogs={updateDogs} droppableId="doggos" listItemType="doggos"></List> */}
-                <Droppable droppableId="doggos">
+                <List dogs={dogs} updateDogs={updateDogs} droppableId="doggos" listItemType="doggos"></List>
+                {/* <Droppable droppableId="doggos">
                   {(provided) => (
                     <ul className="dogListWrapper" {...provided.doppableProps} ref={provided.innerRef}>
                       {dogs.dogPics.map(({id, pic, name, randomName}, index) => {
@@ -109,7 +109,7 @@ function App() {
                       {provided.placeholder}
                   </ul>
                   )}
-                </Droppable>
+                </Droppable> */}
               </div>
               <div className="keepersWrapper">
                 <h2 className="listTitle">Keepers</h2>
