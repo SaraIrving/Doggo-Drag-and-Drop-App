@@ -66,20 +66,6 @@ function App() {
     }
   }
 
-  //THIS FUNCTION IS MOVED INTO LISTITEM COMPONENT
-  // function deleteDog(provided) {
-  //   //have the name of the dog we clicked on
-  //   //use that to find the desired object in the fixed dogs array and delete it??
-
-  //   const dogArray = Array.from(dogs.fixedDogPics)
-  //   for (let i = 0; i < dogArray.length; i++) {
-  //     if (dogArray[i].name === provided.dragHandleProps["data-rbd-drag-handle-draggable-id"]) {
-  //       dogArray.splice(i, 1)
-  //     }
-  //   }
-
-  //   updateDogs(prev => {return {...prev, fixedDogPics: dogArray}})
-  // }
 
   return (
     <div className="App">
@@ -90,26 +76,12 @@ function App() {
       </header>
       <div className="listContainer">
         <h2>Drag and drop these puppers to put them in order of most boopable!</h2>
-        {/* <button onClick={event => onButtonClick()}>Show me dogs!</button> */}
         <Button onClick={event => onButtonClick()} text="Show me dogs!"></Button>
           <DragDropContext onDragEnd={handleOnDragEnd}>
             <div className="dragDropContextWrapper">
               <div className="newDoggoWrapper">
                 <h2 className="listTitle">New Doggos</h2>
                 <List dogs={dogs} updateDogs={updateDogs} droppableId="doggos" listItemType="doggos"></List>
-                {/* <Droppable droppableId="doggos">
-                  {(provided) => (
-                    <ul className="dogListWrapper" {...provided.doppableProps} ref={provided.innerRef}>
-                      {dogs.dogPics.map(({id, pic, name, randomName}, index) => {
-
-                      return (
-                        <ListItem listItemType="doggos" key={randomName + name} draggableId={name} index={index} pic={pic} randomName={randomName}></ListItem>
-                      );
-                      })}
-                      {provided.placeholder}
-                  </ul>
-                  )}
-                </Droppable> */}
               </div>
               <div className="keepersWrapper">
                 <h2 className="listTitle">Keepers</h2>
