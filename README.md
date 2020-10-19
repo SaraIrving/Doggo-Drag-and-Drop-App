@@ -29,4 +29,14 @@ You will also see any lint errors in the console.
 Launches the test runner in the interactive watch mode.<br />
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
+### Dependencies
+  - @testing-library/jest-dom: ^4.2.4,
+  - @testing-library/react: ^9.5.0,
+  - @testing-library/user-event: ^7.2.1,
+  - axios: ^0.20.0,
+  - dog-names: ^2.0.0,
+  - react: ^16.13.1,
+  - react-beautiful-dn": ^13.0.0,
+  - react-dom: ^16.13.1,
+  - react-scripts: 3.4.3
 
