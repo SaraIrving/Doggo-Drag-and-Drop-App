@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/Doggo-Drag-and-Drop-App/static/css/main.6a85afed.chunk.css",
+    "main.js": "/Doggo-Drag-and-Drop-App/static/js/main.e6cd1de6.chunk.js",
+    "main.js.map": "/Doggo-Drag-and-Drop-App/static/js/main.e6cd1de6.chunk.js.map",
+    "runtime-main.js": "/Doggo-Drag-and-Drop-App/static/js/runtime-main.021ef2be.js",
+    "runtime-main.js.map": "/Doggo-Drag-and-Drop-App/static/js/runtime-main.021ef2be.js.map",
+    "static/js/2.a923b5e3.chunk.js": "/Doggo-Drag-and-Drop-App/static/js/2.a923b5e3.chunk.js",
+    "static/js/2.a923b5e3.chunk.js.map": "/Doggo-Drag-and-Drop-App/static/js/2.a923b5e3.chunk.js.map",
+    "index.html": "/Doggo-Drag-and-Drop-App/index.html",
+    "precache-manifest.90767d2d383370b658930d17117b5e57.js": "/Doggo-Drag-and-Drop-App/precache-manifest.90767d2d383370b658930d17117b5e57.js",
+    "service-worker.js": "/Doggo-Drag-and-Drop-App/service-worker.js",
+    "static/css/main.6a85afed.chunk.css.map": "/Doggo-Drag-and-Drop-App/static/css/main.6a85afed.chunk.css.map",
+    "static/js/2.a923b5e3.chunk.js.LICENSE.txt": "/Doggo-Drag-and-Drop-App/static/js/2.a923b5e3.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.021ef2be.js",
+    "static/js/2.a923b5e3.chunk.js",
+    "static/css/main.6a85afed.chunk.css",
+    "static/js/main.e6cd1de6.chunk.js"
+  ]
+}
