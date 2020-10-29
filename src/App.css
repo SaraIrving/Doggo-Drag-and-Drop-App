@@ -1,11 +1,12 @@
 .App {
   text-align: center;
   background-color: lightsteelblue;
+  font-size: calc(10px + 2vmin);
 }
 
 .App-header {
   background-color: rgb(37, 75, 75);
-  max-height: 50px;
+  height: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,11 +27,11 @@ h1 {
 }
 
 ul p {
-  font-size: 15px;
+  /* font-size: 15px; */
 }
 
 p span {
-  font-size: 25px;
+  /* font-size: 25px; */
   font-weight: bold;
 }
 button {
@@ -41,7 +42,8 @@ button {
   padding: 10px;
   transition: all 0.5s;
   cursor: pointer;
-  font-size: 22px;
+  /* font-size: 22px; */
+  font-size: larger;
 }
 
 button:hover {
@@ -50,7 +52,7 @@ button:hover {
 
 ol button {
   border: solid 3px  rgb(37, 75, 75);  
-  font-size: 15px;
+  /* font-size: 15px; */
   background-color:  rgb(37, 75, 75)
 }
 
