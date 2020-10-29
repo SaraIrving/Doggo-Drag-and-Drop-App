@@ -126,7 +126,8 @@ ul button:hover {
 .dogWrapper {
   border: 5px solid darkcyan;
   border-radius: 45px;
-  padding: 40px;
+  /* padding: 40px; */
+  padding: 0.5em;
   margin: 1em;
   max-width: 70%;
   /* background-color:white; */
@@ -136,7 +137,7 @@ ul button:hover {
 
 @media (max-width: 767px) {
   .dogWrapper {
-    padding: 15px;
+    padding: 0.125em;
     
   }
 }
