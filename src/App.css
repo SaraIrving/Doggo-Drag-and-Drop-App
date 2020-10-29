@@ -51,6 +51,7 @@ button:hover {
 }
 
 ol button {
+  font-size: medium;
   border: solid 3px  rgb(37, 75, 75);  
   /* font-size: 15px; */
   background-color:  rgb(37, 75, 75)
