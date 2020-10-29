@@ -6,7 +6,7 @@
 
 .App-header {
   background-color: rgb(37, 75, 75);
-  height: 50px;
+  height: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,6 +14,10 @@
   font-size: calc(10px + 2vmin);
   color: white;
   padding: 20px;
+}
+
+h2 {
+  margin: 10px;
 }
 
 h2, p, button {
@@ -55,6 +59,12 @@ ol button {
   border: solid 3px  rgb(37, 75, 75);  
   /* font-size: 15px; */
   background-color:  rgb(37, 75, 75)
+}
+
+@media (max-width: 767px) {
+  ol button {
+    font-size: small;
+  }
 }
 
 ul button:hover {
@@ -103,6 +113,14 @@ ul button:hover {
   min-height: 400px;
   justify-content: center;
 }
+@media (max-width: 767px) {
+  .dogListWrapper {
+    padding: 3px;
+    margin: 3px;
+    width: 160px;
+    
+  }
+}
 
 
 .dogWrapper {
@@ -116,9 +134,24 @@ ul button:hover {
   color: rgb(37, 75, 75);
 }
 
+@media (max-width: 767px) {
+  .dogWrapper {
+    padding: 15px;
+    
+  }
+}
+
 .dogPic {
   max-width: 200px;
   max-height: 200px;
   border: 5px solid  darkcyan;
   border-radius: 40px;
+}
+
+@media (max-width: 767px) {
+  .dogPic {
+    max-width: 90px;
+  max-height: 90px;
+
+  }
 }
