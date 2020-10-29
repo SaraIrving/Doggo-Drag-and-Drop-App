@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/Doggo-Drag-and-Drop-App/precache-manifest.90767d2d383370b658930d17117b5e57.js"
+  "/Doggo-Drag-and-Drop-App/precache-manifest.907c13bcf30d1f097259be92b6937369.js"
 );
 
 self.addEventListener('message', (event) => {
