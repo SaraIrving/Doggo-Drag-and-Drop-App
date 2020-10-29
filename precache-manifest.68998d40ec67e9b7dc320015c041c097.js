@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "dfc17ffb60da55121ca190f8a674419f",
+    "revision": "249b5481e1a7a701633839b69af99ec7",
     "url": "/Doggo-Drag-and-Drop-App/index.html"
   },
   {
-    "revision": "a9baad29b514915a91f9",
-    "url": "/Doggo-Drag-and-Drop-App/static/css/main.0f752ab6.chunk.css"
+    "revision": "f3c1a30f959925bc352a",
+    "url": "/Doggo-Drag-and-Drop-App/static/css/main.d70343e0.chunk.css"
   },
   {
     "revision": "c3d65efcd1cd730b91d1",
@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Doggo-Drag-and-Drop-App/static/js/2.a923b5e3.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "a9baad29b514915a91f9",
+    "revision": "f3c1a30f959925bc352a",
     "url": "/Doggo-Drag-and-Drop-App/static/js/main.97b208a7.chunk.js"
   },
   {
