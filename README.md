@@ -11,6 +11,8 @@ This project was hosted on Git pages with guidance found in this article (https:
 ### Doggo Drag and Drop
 !["Drag n Drop them Puppers!"](https://raw.githubusercontent.com/SaraIrving/Doggo-Drag-and-Drop-App/master/public/pictures/AppScreenShot.png)
 
+### Responsive Design means you can check out these Handsome Doggos on the go!
+!["Flexible Puppers"](https://raw.githubusercontent.com/SaraIrving/Doggo-Drag-and-Drop-App/master/public/pictures/Screen%20Shot%202020-10-28%20at%206.10.38%20PM.png)
 
 ## Available Scripts
 
