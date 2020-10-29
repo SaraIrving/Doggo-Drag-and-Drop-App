@@ -75,7 +75,7 @@ function App() {
         </h1>
       </header>
       <div className="listContainer">
-        <h2>Drag and drop these puppers to put them in order of most boopable!</h2>
+        <h2>Drag and drop these puppers! <br></br>Put them in order of most handsome, decide which are "keepers" and which to "send to the farm!"</h2>
         <Button onClick={event => onButtonClick()} text="Show me dogs!"></Button>
           <DragDropContext onDragEnd={handleOnDragEnd}>
             <div className="dragDropContextWrapper">
