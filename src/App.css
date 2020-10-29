@@ -138,6 +138,7 @@ ul button:hover {
 @media (max-width: 767px) {
   .dogWrapper {
     padding: 0.125em;
+    border-radius: 10px
     
   }
 }
